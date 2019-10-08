@@ -343,6 +343,26 @@ module.exports = function(webpackEnv) {
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
+            {
+
+              exclude: [/\.js$/,/\.html$/,/\.json$/,/\.scss$/],
+          
+              loader: require.resolve('file-loader'),
+          
+              options: {
+          
+                      name: 'static/media/[name].[hash:8].[ext]',
+          
+                  },
+          
+          },
+          {
+          
+              test:/\.scss$/,
+          
+              loaders:['style-loader','css-loader','sass-loader']
+          
+          },
             // "url" loader works like "file" loader except that it embeds assets
             // smaller than specified limit in bytes as data URLs to avoid requests.
             // A missing `test` is equivalent to a match.
@@ -376,6 +396,7 @@ module.exports = function(webpackEnv) {
                         },
                       },
                     },
+
                   ],
                 ],
                 // This is a feature of `babel-loader` for webpack (not Babel itself).
